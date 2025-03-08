@@ -1,0 +1,22 @@
+{
+    "lg": "Language",
+    "ar": "arabic",
+    "en": "Englis",
+    "selectLg": "Select Language",
+    "theme": "theme",
+    "dark": "dark",
+    "light": "light",
+    "profile":"profile",
+    "settings": "settings",
+    "home":"Home",
+    "map":"Map",
+    "fav":"Favorite",
+    "welcome_back": "Welcome back",
+    "le":"EN",
+    "location":"Tulkarem, Palestine",
+    "all":"All",
+    "sport": "sport ",
+    "bday":"Birthday",
+    "meetings":"Meetings"
+
+}
