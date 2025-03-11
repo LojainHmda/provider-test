@@ -17,6 +17,21 @@
     "all":"All",
     "sport": "sport ",
     "bday":"Birthday",
-    "meetings":"Meetings"
+    "meetings":"Meetings",
+    "addEvent":"create Event",
+    "event_time": "Event Time",
+  "choose_time": "Choose Time",
+  "event_date": "Event Date",
+  "choose_date": "Choose Date",
+  "event_description": "Event Description",
+  "event_title": "Event Title",
+  "title": "Title",
+  "add_event": "Add Event",
+  "choose_event_location": "Choose Event Location",
+  "search_for_event": "Search for Event",
+  "enter_email": "Enter your email",
+  "enter_password": "Enter your password",
+  "login": "Login"
+
 
 }

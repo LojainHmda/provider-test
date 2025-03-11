@@ -5,8 +5,17 @@ import 'package:testprovider/core/utils/app_colors.dart';
 import '../providers/theme_provider.dart';
 
 class TypesTab extends StatefulWidget {
-  TypesTab(this.type);
+  TypesTab(this.type, this.isSelected,
+      {required this.labelColor,
+      required this.backgroundColor,
+      required this.selectedlabelColor,
+      required this.selectedbackgroundColor});
   final String type;
+  final bool isSelected;
+  final Color labelColor;
+  final Color backgroundColor;
+  final Color selectedlabelColor;
+  final Color selectedbackgroundColor;
   @override
   State<TypesTab> createState() => _TypesTabState();
 }
@@ -16,17 +25,24 @@ class _TypesTabState extends State<TypesTab> {
   Widget build(BuildContext context) {
     var theme = Provider.of<ThemeProvider>(context);
     return Container(
-        width: 80,
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         decoration: BoxDecoration(
-            border: Border.all(color: AppColors.whiteColor),
-            borderRadius: BorderRadius.circular(30)),
+            color: widget.isSelected
+                ? widget.selectedbackgroundColor
+                : widget.backgroundColor,
+            border: Border.all(
+                color: widget.isSelected
+                    ? widget.selectedlabelColor
+                    : widget.labelColor,
+                width: 2),
+            borderRadius: BorderRadius.circular(20)),
         child: Center(
             child: Text(
           widget.type,
           style: TextStyle(
-              color: theme.theme == ThemeMode.dark
-                  ? AppColors.greyColor
-                  : AppColors.blackColor),
+              color: widget.isSelected
+                  ? widget.selectedlabelColor
+                  : widget.labelColor),
         )));
   }
 }

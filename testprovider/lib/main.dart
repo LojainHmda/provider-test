@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:testprovider/core/features/addEvent.dart';
 import 'package:testprovider/core/features/home_page.dart';
+import 'package:testprovider/core/features/login_page.dart';
 import 'package:testprovider/core/features/profile_page.dart';
 import 'package:testprovider/core/providers/loclization_provider.dart';
 import 'package:testprovider/core/utils/app_theme.dart';
@@ -8,7 +10,6 @@ import 'package:testprovider/core/utils/app_theme.dart';
 import 'core/features/bottom_nav_bar_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'core/features/x.dart';
 import 'core/providers/theme_provider.dart';
 
 void main() {
@@ -38,9 +39,11 @@ class MainApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(language.language),
-      initialRoute: "/",
+      initialRoute: "/login",
       routes: {
+         "/login": (context) => LoginPage(),
         "/": (context) => BottomNavBar(),
+        "/addEvent": (context) => AddEvent(),
       },
     );
   }
