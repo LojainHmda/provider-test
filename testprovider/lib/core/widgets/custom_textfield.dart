@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.hintStyle,
     this.labelStyle,
     this.obscureText = false,
+    this.validator,
   });
   final TextEditingController controller;
   final int? maxline;
@@ -29,17 +30,24 @@ class CustomTextField extends StatelessWidget {
   TextStyle? hintStyle;
   TextStyle? labelStyle;
   bool obscureText;
+  final FormFieldValidator<String>? validator;
+
   @override
   Widget build(BuildContext context) {
     var theme = Provider.of<ThemeProvider>(context);
-print(color);
+    print(color);
 
     return TextFormField(
-
+      validator: validator ??
+          (text) {
+            if (text == null || text.isEmpty) {
+              return "This field is required";
+            }
+            return null;
+          },
       controller: controller,
       maxLines: maxline,
       decoration: InputDecoration(
-        
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
         alignLabelWithHint: true,

@@ -11,7 +11,7 @@ import '../providers/loclization_provider.dart';
 import '../providers/theme_provider.dart';
 
 class BottomNavBar extends StatefulWidget {
-  BottomNavBar({super.key});
+  const BottomNavBar({super.key});
 
   @override
   State<BottomNavBar> createState() => BottomNavBarState();
@@ -21,7 +21,9 @@ class BottomNavBarState extends State<BottomNavBar> {
   int index = 0;
 
   List<Widget> pages = [
-    HomePage(),
+    HomePage(
+      key: HomePage.homeKey,
+    ),
     MapPage(),
     FavPage(),
     ProfileScreen(),
@@ -98,10 +100,9 @@ class BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    var language = Provider.of<LocalizationsProvider>(context);
     var theme = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: selectAppBar(index) ,
+      appBar: selectAppBar(index),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -110,9 +111,9 @@ class BottomNavBarState extends State<BottomNavBar> {
           backgroundColor: theme.theme == ThemeMode.dark
               ? AppColors.primaryDark
               : AppColors.primaryLight,
-          child: Icon(Icons.add, color: AppColors.whiteColor),
           shape: StadiumBorder(
-              side: BorderSide(width: 5, color: AppColors.whiteColor))),
+              side: BorderSide(width: 5, color: AppColors.whiteColor)),
+          child: Icon(Icons.add, color: AppColors.whiteColor)),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: index,

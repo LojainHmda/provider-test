@@ -1,9 +1,14 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:testprovider/core/models/event_model.dart';
 import 'package:testprovider/core/utils/app_colors.dart';
+import 'package:testprovider/core/utils/firebase.dart' show FirebaseUtils;
 import 'package:testprovider/core/widgets/taps_bar.dart';
 
 import '../providers/loclization_provider.dart';
@@ -24,10 +29,10 @@ class AddEvent extends StatelessWidget {
   );
 
   var formKey = GlobalKey<FormState>();
+  int selectedCtegory = 0;
   @override
   Widget build(BuildContext context) {
     var theme = Provider.of<ThemeProvider>(context);
-    var language = Provider.of<LocalizationsProvider>(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -69,6 +74,7 @@ class AddEvent extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: TabsBar(
+                  onTabChanged: (p) {},
                   backgroundColor: AppColors.whiteColor,
                   labelColor: theme.theme == ThemeMode.dark
                       ? AppColors.primaryDark
@@ -88,7 +94,7 @@ class AddEvent extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Form(
-                    key: key,
+                    key: formKey,
                     child: Column(
                       children: [
                         CustomTextField(
@@ -230,7 +236,12 @@ class AddEvent extends StatelessWidget {
                                     ? AppColors.primaryDark
                                     : AppColors.primaryLight,
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  await addEvent(context);
+                                  Navigator.pushNamed(context, "/");
+                                }
+                              },
                               child: Text(
                                 AppLocalizations.of(context)!.add_event,
                                 style: TextStyle(color: AppColors.whiteColor),
@@ -244,5 +255,26 @@ class AddEvent extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  Future<void> addEvent(BuildContext context) async {
+    List<String> types = [
+      AppLocalizations.of(context)!.all,
+      AppLocalizations.of(context)!.sport,
+      AppLocalizations.of(context)!.meetings,
+      AppLocalizations.of(context)!.bday
+    ];
+    var event = EventModel(
+        category: types[TabsBar.selectedindex],
+        title: titleController.text,
+        date: dateController.text,
+        location: locationController.text,
+        description: descriptionController.text,
+        time: timeController.text);
+    try {
+      await FirebaseUtils.addEventCollection(event);
+    } catch (e) {
+      log("$e");
+    }
   }
 }

@@ -1,0 +1,2 @@
+C:/Users/lojai/OneDrive/Desktop/flutter projects/provider-test/testprovider/android/app/.cxx/Debug/96w376f5/x86/CMakeFiles/edit_cache.dir
+C:/Users/lojai/OneDrive/Desktop/flutter projects/provider-test/testprovider/android/app/.cxx/Debug/96w376f5/x86/CMakeFiles/rebuild_cache.dir
