@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,7 +10,6 @@ import 'package:testprovider/core/utils/app_colors.dart';
 import 'package:testprovider/core/utils/firebase.dart' show FirebaseUtils;
 import 'package:testprovider/core/widgets/taps_bar.dart';
 
-import '../providers/loclization_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/custom_textfield.dart';
 

@@ -50,9 +50,7 @@ class _FavPageState extends State<FavPage> {
             child: ListView.builder(
               itemCount: eventsList.length,
               itemBuilder: (context, index) {
-                return EventWidget(
-                  event: eventsList[index],
-                );
+                return EventWidget(event: eventsList[index]);
               },
             ),
           ),

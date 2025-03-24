@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show CollectionReference;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:testprovider/core/features/favorite_page.dart';
 import 'package:testprovider/core/features/home_page.dart';
 import 'package:testprovider/core/models/event_model.dart';
 import 'package:testprovider/core/utils/app_colors.dart';
@@ -15,26 +16,19 @@ class EventWidget extends StatefulWidget {
 }
 
 class _EventWidgetState extends State<EventWidget> {
-  bool deleteflag = false;
   void deleteEvent(EventModel event) async {
-    final state = HomePage.homeKey.currentState;
-    CollectionReference<EventModel> query =
-        await FirebaseUtils.getEventCollection();
+    CollectionReference<EventModel> query = FirebaseUtils.getEventCollection();
 
     return query.doc(event.id).delete().then((value) {
       print("event Deleted");
-      state?.getAllEvents();
     }).catchError((error) => print("Failed to delete event: $error"));
   }
 
   void updateIsFav(EventModel event) async {
-    CollectionReference<EventModel> query =
-        await FirebaseUtils.getEventCollection();
-    return query
-        .doc(event.id)
-        .update({"isFav": event.isFav})
-        .then((value) => print("isFav Updated"))
-        .catchError((error) => print("Failed to update isFav: $error"));
+    CollectionReference<EventModel> query = FirebaseUtils.getEventCollection();
+    return query.doc(event.id).update({"isFav": event.isFav}).then((value) {
+      print("isFav Updated");
+    }).catchError((error) => print("Failed to update isFav: $error"));
   }
 
   @override

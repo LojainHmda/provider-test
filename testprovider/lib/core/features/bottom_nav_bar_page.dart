@@ -11,8 +11,6 @@ import '../providers/loclization_provider.dart';
 import '../providers/theme_provider.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
-
   @override
   State<BottomNavBar> createState() => BottomNavBarState();
 }
@@ -21,9 +19,7 @@ class BottomNavBarState extends State<BottomNavBar> {
   int index = 0;
 
   List<Widget> pages = [
-    HomePage(
-      key: HomePage.homeKey,
-    ),
+    HomePage(),
     MapPage(),
     FavPage(),
     ProfileScreen(),
