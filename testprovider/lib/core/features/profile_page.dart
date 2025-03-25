@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:testprovider/core/providers/loclization_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:testprovider/l10n/app_localizations.dart';
 import 'package:testprovider/core/providers/theme_provider.dart';
 import 'package:testprovider/core/utils/app_colors.dart';
 
@@ -81,7 +81,6 @@ class ProfileScreen extends StatelessWidget {
                         height: 15,
                       ),
                       DropdownButton(
-                        
                           isExpanded: true,
                           hint: Text(AppLocalizations.of(context)!.selectLg),
                           value: language.language,

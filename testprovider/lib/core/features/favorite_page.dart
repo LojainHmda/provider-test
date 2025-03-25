@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart'
     show FirebaseFirestore, QuerySnapshot;
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:testprovider/l10n/app_localizations.dart';
 import 'package:testprovider/core/models/event_model.dart';
 
 import '../utils/firebase.dart';
@@ -9,7 +9,7 @@ import '../widgets/custom_textfield.dart';
 import '../widgets/event.dart';
 
 class FavPage extends StatefulWidget {
-  FavPage({super.key});
+  const FavPage({super.key});
 
   @override
   State<FavPage> createState() => _FavPageState();
@@ -36,6 +36,7 @@ class _FavPageState extends State<FavPage> {
     setState(() {});
   }
 
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
@@ -50,7 +51,10 @@ class _FavPageState extends State<FavPage> {
             child: ListView.builder(
               itemCount: eventsList.length,
               itemBuilder: (context, index) {
-                return EventWidget(event: eventsList[index]);
+                return EventWidget(
+                  event: eventsList[index],
+                  update: getFavEvents,
+                );
               },
             ),
           ),

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:testprovider/core/models/event_model.dart';
 import 'package:testprovider/core/providers/theme_provider.dart';
@@ -8,9 +7,9 @@ import 'package:testprovider/core/utils/app_colors.dart';
 import 'package:testprovider/core/utils/firebase.dart';
 import 'package:testprovider/core/widgets/event.dart';
 import 'package:testprovider/core/widgets/taps_bar.dart';
+import 'package:testprovider/l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
-  static final GlobalKey<_HomePageState> homeKey = GlobalKey<_HomePageState>();
   const HomePage({super.key});
 
   @override
@@ -26,20 +25,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   void getFilteredEvents(String filterdCategory) async {
-    Query<EventModel> query = await FirebaseUtils.getEventCollection();
+    Query<EventModel> query = FirebaseUtils.getEventCollection();
     if (filterdCategory != "All") {
       query = query.where('category', isEqualTo: filterdCategory);
       var events = await query.get();
-      eventsList = events.docs.map((doc) {
-        return doc.data();
-      }).toList();
-      setState(() {});
-    } else
-      getAllEvents();
-  }
 
-  void update() {
-    setState(() {});
+      setState(() {
+        eventsList = events.docs.map((doc) {
+          return doc.data();
+        }).toList();
+      });
+    } else {
+      getAllEvents();
+    }
   }
 
   void getAllEvents() async {
@@ -47,10 +45,12 @@ class _HomePageState extends State<HomePage> {
         .orderBy("date", descending: true)
         .get();
     print(query.toString());
-    eventsList = query.docs.map((doc) {
-      return doc.data();
-    }).toList();
-    setState(() {});
+
+    setState(() {
+      eventsList = query.docs.map((doc) {
+        return doc.data();
+      }).toList();
+    });
   }
 
   @override
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                   TabsBar(
                     onTabChanged: (p0) {
                       setState(() {
-                        TabsBar.selectedindex == p0;
+                        TabsBar.selectedindex = p0;
                         getFilteredEvents(types[p0]);
                       });
                     },
@@ -114,7 +114,8 @@ class _HomePageState extends State<HomePage> {
               child: ListView.builder(
                 itemCount: eventsList.length,
                 itemBuilder: (context, index) {
-                  return EventWidget(event: eventsList[index]);
+                  return EventWidget(
+                      event: eventsList[index], update: getAllEvents);
                 },
               ),
             ),

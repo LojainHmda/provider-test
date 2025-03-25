@@ -7,7 +7,7 @@ import 'package:testprovider/core/providers/loclization_provider.dart';
 import 'package:testprovider/core/utils/app_theme.dart';
 
 import 'core/features/bottom_nav_bar_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:testprovider/l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'core/providers/theme_provider.dart';
 import 'firebase_options.dart';

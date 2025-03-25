@@ -4,13 +4,15 @@ import 'package:testprovider/core/features/favorite_page.dart';
 import 'package:testprovider/core/features/home_page.dart';
 import 'package:testprovider/core/features/map_page.dart';
 import 'package:testprovider/core/features/profile_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:testprovider/l10n/app_localizations.dart';
 import 'package:testprovider/core/utils/app_colors.dart';
 
 import '../providers/loclization_provider.dart';
 import '../providers/theme_provider.dart';
 
 class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({super.key});
+
   @override
   State<BottomNavBar> createState() => BottomNavBarState();
 }
